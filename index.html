@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MJ ❤️ My Bhe</title>
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+body{
+  background:linear-gradient(135deg,#ff4b6e,#ff758c,#1a1a1a);
+  color:white;
+  text-align:center;
+  overflow-x:hidden;
+}
+
+section{padding:calc(60px + 2vw) 10px;}
+
+h1{font-family:'Great Vibes',cursive;font-size:calc(1.5rem + 3vw); text-shadow:0 0 20px #ff4b6e;}
+h2{font-family:'Great Vibes',cursive;font-size:calc(1.2rem + 2vw); text-shadow:0 0 15px #ff4b6e;}
+p{font-size:calc(0.9rem + 1vw);}
+
+button{
+  margin-top:20px;
+  padding: calc(8px + 0.5vw) calc(16px + 1vw);
+  border:none;
+  border-radius:30px;
+  background:white;
+  color:#ff1e50;
+  font-weight:bold;
+  font-size: calc(0.8rem + 1vw);
+  cursor:pointer;
+  transition:.3s;
+}
+button:hover{transform:scale(1.1);background:#ff1e50;color:white;}
+
+/* Letter */
+.letter{
+  max-width:650px;
+  margin:auto;
+  background:rgba(255,255,255,0.1);
+  padding:20px;
+  border-radius:20px;
+  backdrop-filter:blur(10px);
+  min-height:120px;
+  font-size:calc(0.9rem + 0.5vw);
+}
+
+/* Love Meter */
+.meter{
+  width:80%;
+  height:20px;
+  background:rgba(255,255,255,0.2);
+  margin:30px auto;
+  border-radius:20px;
+  overflow:hidden;
+}
+.fill{height:100%;width:0%;background:#ff1e50;transition:2s;}
+
+/* Floating elements */
+.floating{position:fixed;pointer-events:none;animation:float 6s linear infinite;font-size:calc(12px + 1vw);}
+@keyframes float{0%{transform:translateY(100vh);opacity:1;}100%{transform:translateY(-10vh);opacity:0;}}
+
+/* Moving Heart Cursor */
+#cursorHeart{position:fixed;font-size:20px;pointer-events:none;transition:transform .1s linear;}
+
+/* Kiss */
+.kiss{font-size:3rem;opacity:0;transition:.5s;}
+
+/* Secret */
+.secret{display:none;margin-top:20px;color:#ffd6e0;}
+
+/* Proposal */
+.no-btn{position:relative;}
+
+/* Fireworks */
+.firework{position:fixed;width:10px;height:10px;border-radius:50%;animation:explode 1s ease-out forwards;}
+@keyframes explode{from{transform:scale(1);opacity:1;}to{transform:scale(8);opacity:0;}}
+
+/* Memories Gallery */
+.gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:15px;margin-top:40px;}
+.memory{background:rgba(255,255,255,0.08);padding:10px;border-radius:20px;transition:.4s;}
+.memory:hover{transform:translateY(-5px);box-shadow:0 0 20px #ff4b6e;}
+.memory img{width:100%;height:auto;border-radius:15px;cursor:pointer;transition:.3s;}
+.memory img:hover{transform:scale(1.05);}
+.memory p{margin-top:8px;font-size:calc(0.8rem + 0.5vw);color:#ffd6e0;font-family:'Poppins',sans-serif;font-weight:600;}
+
+/* Modal */
+.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.9);justify-content:center;align-items:center;z-index:1000;}
+.modal img{max-width:95%;max-height:85%;border-radius:20px;box-shadow:0 0 40px #ff4b6e;}
+
+/* Mobile adjustments */
+@media (max-width:480px){
+  .floating{font-size:calc(10px + 1vw);}
+  .no-btn, section button{width:80%;margin:10px auto;display:block;}
+  .gallery{gap:10px;}
+}
+</style>
+</head>
+
+<body>
+
+<div id="cursorHeart">💖</div>
+
+<section class="hero">
+  <h1>My future ❤️ My Bhe</h1>
+  <p>Happy Valentine's Day, my love 💕</p>
+  <button onclick="scrollDown()">Open My Heart 💌</button>
+</section>
+
+<section>
+  <h2>My Love Letter 💌</h2>
+  <div class="letter" id="typing"></div>
+</section>
+
+<section>
+  <h2>How Long We've Been Together ⏳</h2>
+  <p id="relationshipTime"></p>
+</section>
+
+<section>
+  <h2>How Much I Love You 💖</h2>
+  <div class="meter"><div class="fill" id="loveFill"></div></div>
+  <button onclick="fillLove()">Reveal Love Level</button>
+</section>
+
+<section>
+  <h2>Press & Hold For a Kiss 💋</h2>
+  <button onmousedown="showKiss()" onmouseup="hideKiss()">Hold Me 💞</button>
+  <div class="kiss" id="kiss">😘💋😘</div>
+</section>
+
+<section>
+  <h2>Our Beautiful Memories 📸</h2>
+  <div class="gallery">
+    <div class="memory"><img src="image/viber_image_2026-02-14_09-36-33-750.jpg" onclick="openModal(this)"><p>Our first picture 💕</p></div>
+    <div class="memory"><img src="image/viber_image_2026-02-14_09-36-33-929.jpg" onclick="openModal(this)"><p>That unforgettable day 😘</p></div>
+    <div class="memory"><img src="image/viber_image_2026-02-14_09-36-33-783.jpg" onclick="openModal(this)"><p>Laughing together 🥰</p></div>
+    <div class="memory"><img src="image/viber_image_2026-02-14_09-36-33-976.jpg" onclick="openModal(this)"><p>Forever my safe place ❤️</p></div>
+  </div>
+</section>
+
+<div id="imageModal" class="modal" onclick="closeModal()">
+  <img id="modalImg">
+</div>
+
+<section>
+  <button onclick="unlockSecret()">Tap for Secret 🔐</button>
+  <div class="secret" id="secretMsg">
+    MY bhe… I will always choose you. In every lifetime. 💍❤️
+  </div>
+</section>
+
+<section>
+  <h2>Will You Be My Valentine Forever? 💘</h2>
+  <button onclick="celebrate()">YES 💖</button>
+  <button class="no-btn" onmouseover="moveNo(this)">NO 😢</button>
+</section>
+
+<audio id="bgMusic" loop autoplay muted>
+  <source src="music/Jim Brickman, Martina McBride - Valentine (Lyrics)_2.mp3">
+</audio>
+<button onclick="toggleMusic()">🎵 Play / Pause Music</button>
+
+<script>
+/* Scroll */
+function scrollDown(){window.scrollTo({top:window.innerHeight,behavior:"smooth"});}
+
+/* Typing */
+const text="My annie, my Bhe... You are my happiness, my peace, and my forever. Every day with you feels magical. I love you endlessly. ❤️";
+let i=0;
+function typeWriter(){if(i<text.length){document.getElementById("typing").innerHTML+=text.charAt(i);i++;setTimeout(typeWriter,40);}}
+typeWriter();
+
+/* Relationship Counter */
+const startDate=new Date("October 13, 2022 01:00:00").getTime();
+setInterval(()=>{
+  const now=new Date().getTime();
+  const diff=now-startDate;
+  const days=Math.floor(diff/(1000*60*60*24));
+  document.getElementById("relationshipTime").innerHTML=days+" days of loving you ❤️";
+},1000);
+
+/* Love Meter */
+function fillLove(){document.getElementById("loveFill").style.width="100%";}
+
+/* Kiss */
+function showKiss(){document.getElementById("kiss").style.opacity="1";}
+function hideKiss(){document.getElementById("kiss").style.opacity="0";}
+
+/* Secret */
+function unlockSecret(){document.getElementById("secretMsg").style.display="block";}
+
+/* Proposal */
+function moveNo(btn){btn.style.position="absolute";btn.style.top=Math.random()*window.innerHeight+"px";btn.style.left=Math.random()*window.innerWidth+"px";}
+function celebrate(){
+  for(let i=0;i<25;i++){
+    const fw=document.createElement("div");
+    fw.classList.add("firework");
+    fw.style.background=`hsl(${Math.random()*360},100%,50%)`;
+    fw.style.top=Math.random()*100+"vh";
+    fw.style.left=Math.random()*100+"vw";
+    document.body.appendChild(fw);
+    setTimeout(()=>{fw.remove();},1000);
+  }
+  alert("Forever yours, MY bhe 💖");
+}
+
+/* Floating hearts & roses */
+function createFloating(symbol){
+  const el=document.createElement("div");
+  el.classList.add("floating");
+  el.innerHTML=symbol;
+  el.style.left=Math.random()*100+"vw";
+  el.style.fontSize=Math.random()*20+15+"px";
+  el.style.animationDuration=Math.random()*3+3+"s";
+  document.body.appendChild(el);
+  setTimeout(()=>{el.remove();},6000);
+}
+setInterval(()=>createFloating("❤"),500);
+setInterval(()=>createFloating("🌹"),800);
+
+/* Moving Heart Cursor */
+document.addEventListener("mousemove",function(e){
+  const heart=document.getElementById("cursorHeart");
+  heart.style.left=e.clientX+"px";
+  heart.style.top=e.clientY+"px";
+});
+
+/* Memories Modal */
+function openModal(img){document.getElementById("imageModal").style.display="flex";document.getElementById("modalImg").src=img.src;}
+function closeModal(){document.getElementById("imageModal").style.display="none";}
+
+/* Music autoplay & fade-in */
+window.addEventListener('load', () => {
+  const music = document.getElementById("bgMusic");
+  music.muted = false;
+  music.play().then(() => fadeInMusic(music));
+});
+function fadeInMusic(audio, duration=3000){
+  audio.volume = 0;
+  const step = 0.01;
+  const interval = duration/(1/step);
+  const fade = setInterval(()=>{
+    if(audio.volume < 1){audio.volume = Math.min(audio.volume+step,1);}else{clearInterval(fade);}
+  }, interval);
+}
+
+function toggleMusic(){const music=document.getElementById("bgMusic");music.paused?music.play():music.pause();}
+</script>
+</body>
+</html>
